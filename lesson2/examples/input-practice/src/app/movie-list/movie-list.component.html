@@ -4,5 +4,14 @@
        <li *ngFor ="let movie of movies">{{movie}}</li>
     </ol>
     <hr>
+    
+    <!-- <input #newMovie (keyup.enter)="message = addMovie(newMovie.value); newMovie.value = ''" type="text" placeholder="Enter Movie Title Here"/>
+    <button (click)="message = addMovie(newMovie.value); newMovie.value = ''">Add</button>
+    <p *ngIf = "message" style="color:red">Must enter movie!</p>
+    <p *ngIf = "movies.includes(newMovie)" style="color:red">Movie already on the list. Please enter new movie.</p> -->
+
+    <input #newMovie (keyup.enter)="message = addMovie(newMovie.value); newMovie.value = ''" type="text" placeholder="Enter Movie Title Here"/>
+    <button (click)="message = addMovie(newMovie.value); newMovie.value = ''">Add</button>
+    <p class = "error" *ngIf = "message">{{message}}</p>
 
  </div>
