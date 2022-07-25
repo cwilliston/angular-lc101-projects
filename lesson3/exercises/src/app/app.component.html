@@ -2,7 +2,7 @@
    <div class="container-header">
       <h1>Flight Simulator</h1>
       <h2>Current Flight Status</h2>
-      <p>Space shuttle ready for takeoff!</p>
+      <p>{{message}}</p>
       <h2>Shuttle Trajectory</h2>
    </div>
    <div class="row justify-content-center">
@@ -15,26 +15,26 @@
          </div>
       </div>
 
-      <div class="col-6">
+      <div class="col-6" [style.backgroundColor]="color">
          <div class="shuttle-background" style="background-color: green">
-            <img src="assets/images/LaunchCode_rocketline_white.png" height = "75" width = "75" [style.left]="0" [style.bottom]="0"/>
+            <img #rocketPic src="assets/images/LaunchCode_rocketline_white.png" height = "75" width = "75" [style.left]="0" [style.bottom]="0"/>
          </div>
       </div>
 
       <div class="col-3">
-         <div class="container-right"b>
-            <button>Up</button>
-            <button>Down</button>
-            <button>Right</button>
-            <button>Left</button>
+         <div *ngIf="!takeOffEnabled" class="container-right"b>
+            <button (click)="moveRocket(rocketPic, 'up')" (click)="proximityWarning()">Up</button>
+            <button (click)="moveRocket(rocketPic, 'down')" (click)="proximityWarning()">Down</button>
+            <button (click)="moveRocket(rocketPic, 'right')" (click)="proximityWarning()">Right</button>
+            <button (click)="moveRocket(rocketPic, 'left')" (click)="proximityWarning()">Left</button>
             <h3>Space Shuttle Height</h3>
-            <p>0 km</p>
+            <p>{{height}} km</p>
          </div>
       </div>
    </div>
    <div class="container-control-buttons">
-      <button>Take Off</button>
-      <button>Land</button>
-      <button>Abort Mission</button>
+      <button [disabled]="!takeOffEnabled" (click)="handleTakeOff()">Take Off</button>
+      <button [disabled]="takeOffEnabled" (click)="handleLand(rocketPic)">Land</button>
+      <button [disabled]="takeOffEnabled" (click)="handleAbort(rocketPic)">Abort Mission</button>
    </div>
 </div>
